@@ -94,6 +94,17 @@
   }
   showSlide(0);
 
+  function showNextSlide() {
+    showSlide(currentSlide + 1);
+  }
+
+  function showPreviousSlide() {
+    showSlide(currentSlide - 1);
+  }
+
+  previousButton.addEventListener('click', showPreviousSlide);
+  nextButton.addEventListener('click', showNextSlide);
+
   const assessmentContainer = document.getElementById('assessment');
   const resultsContainer = document.getElementById('results');
   const submitButton = document.getElementById('submit');
