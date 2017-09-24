@@ -20,12 +20,14 @@
             </label>`
           );
         }
-        // pass the dimenion to the value of a radio button - in the name or in a data attribute i.e. data-dimension 
+        // pass the dimenion to the value of a radio button - in the name or in a data attribute i.e. data-dimension
         // $(["data-dimension='adaptive']:selected").length
 
         output.push(
-          `<div class='question'> ${currentQuestion.question} </div>
-          <div class='answers'> ${answers.join('')} </div>`
+          `<div class='slide'>
+          <div class='question'> ${currentQuestion.question} </div>
+          <div class='answers'> ${answers.join('')} </div>
+          </div>`
         );
       });
       quizContainer.innerHTML = output.join('');
@@ -62,6 +64,8 @@
     + 'Collaborative: ' + numCollaborative + 'Result: ' + numResult + 'Customer: ' + numCustomer
     + 'Detail: ' + numDetail
   }
+
+  $(["data-dimension='adaptive']:selected").length
 
   const assessmentContainer = document.getElementById('assessment');
   const resultsContainer = document.getElementById('results');
