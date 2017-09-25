@@ -1,13 +1,15 @@
 (function(){
   function buildAssessment() {}
+    // Store HTML output
     const output = [];
-
+    // For each question
     questions.forEach(
       (currentQuestion, questionNumber) => {
+        // Store the list of answer choices
         const answers = [];
-
+        // For each available answer
         for(letter in currentQuestion.answers) {
-
+          // Add an HTML radio button
           answers.push(
             `<label>
             <input id='radioButton type='radio'
@@ -25,7 +27,7 @@
 
         output.push(
           `<div class='slide'>
-          <div class='question'> ${currentQuestion.question} </div>
+          <div class='question'>Pick the option that describes you best:</div>
           <div class='answers'> ${answers.join('')} </div>
           </div>`
         );
@@ -108,60 +110,78 @@
   const assessmentContainer = document.getElementById('assessment');
   const resultsContainer = document.getElementById('results');
   const submitButton = document.getElementById('submit');
-  const questions = [
+  const options = [
     {
-      question: "Pick the option that describes you best:",
-      options: {
-        a: "I am innovative",
-        b: "I have a high sense of integrity"
-      },
-      dimensionA: "Adaptive",
-      dimensionB: "Integrity"
+      Adaptive: {["I am innovative",
+                  "I take risks",
+                  "I am willing to experiment",
+                  "I am fast moving",
+                  "I am quick to take advantage of opportunities",
+                  "I don't like to be constrained by rules",
+                  "I am flexible",
+                  "I adjust easily to changing environments",
+                  "I welcome change",
+                  "I am a curious person"]}
     },
     {
-      question: "Pick the option that describes you best:",
-      options: {
-        a: "I take risks",
-        b: "I am team oriented"
-      },
-      dimensionA: "Adaptive",
-      dimensionB: "Collaborative"
+      Integrity: {["I have a high sense of integrity",
+      "I have high ethical standards",
+      "I am honest",
+      "I respect individuals",
+      "I am fair",
+      "I am trustworthy",
+      "I always tell the truth",
+      "I lead by example",
+      "I am not easily offended",
+      "I always try to do the right thing"]}
     },
     {
-      question: "Pick the option that describes you best:",
-      options: {
-        a: "I have high ethical standards",
-        b: "I am cooperative"
-      },
-      dimensionA: "Integrity",
-      dimensionB: "Collaborative"
+      Collaborative: {[ "I am team oriented",
+      "I am cooperative",
+      "I am supportive",
+      "I work in collaboration with others",
+      "I avoid conflicts",
+      "I am always happy to share knowledge",
+      "I am a good communicator",
+      "I share responsibilities",
+      "I like working together with others",
+      "I am always available to help out a colleague in need"]}
     },
     {
-      question: "Pick the option that describes you best:",
-      options: {
-        a: "I am results oriented",
-        b: "I am customer oriented"
-      },
-      dimensionA: "Result",
-      dimensionB: "Customer"
+      Result: {["I am results oriented",
+      "I have high expectations for performance",
+      "I am achievement oriented",
+      "I reach my goals",
+      "I am ambitious",
+      "I can sometimes be aggresive",
+      "I set clear goals",
+      "I am good at identifying effective processes",
+      "I am action oriented",
+      "I focus on the outcome, rather than the process"]}
     },
     {
-      question: "Pick the option that describes you best:",
-      options: {
-        a: "I have high expectations for performance",
-        b: "I pay attention to detail"
-      },
-      dimensionA: "Result",
-      dimensionB: "Detail"
+    Customer: {[ "I am customer oriented",
+      "I listen to customers",
+      "I watch the markets carefully",
+      "I value our clients",
+      "I respond promptly to clients",
+      "I always put customer needs first",
+      "I work to satisfy our customers",
+      "I put the customer's requirements ahead of anything else",
+      "I highly value customer feedback",
+      "I base my decisions on what our customers need & want"]}
     },
     {
-      question: "Pick the option that describes you best:",
-      options: {
-        a: "I listen to customers",
-        b: "I put emphasis on quality"
-      },
-      dimensionA: "Customer",
-      dimensionB: "Detail"
+    Detail: {["I pay attention to detail",
+      "I put emphasis on quality",
+      "I am precise",
+      "I focus on rules",
+      "I am careful",
+      "I see patterns in data",
+      "I am analytical ",
+      "I am good at understanding cause-and-effect relationships",
+      "I am accurate in my work",
+      "I notice mistakes quickly"]}
     }
   ];
   // Display quiz
