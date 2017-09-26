@@ -1,6 +1,9 @@
-'use strict';
 (function(){
-  const options = [
+  'use strict';
+
+  // 6 dimension catories
+  var categories = ["Adaptive", "Integrity", "Collaborative", "Result", "Customer", "Detail"];
+  var dimensions = [
     {
       "Adaptive": [
                   "I am innovative",
@@ -79,145 +82,187 @@
 
   function buildAssessment() {}
     // Store HTML output
-    const output = [];
-
+    var output = [];
+    // 30 questions in the assessment
     var numberOfQuestions = 30;
 
-    function randomDim(obj) {
-      var result;
-      var count = 0;
-      for (var prop in obj)
-        if (Math.random() < 1/++ count)
-          result = prop;
-        return result;
+    // Randomly shuffle an array
+    function shuffle(array) {
+      var currentIndex = array.length, temporaryValue, randomIndex;
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+      return array;
     }
 
-    for (i=0; i < numberOfQuestions; i++) {
-      console.log("Question #" + i);
-      var randomDimension = options[randomDim(options)];
-      console.log(randomDim(options) + ": " + randomDimension[Math.floor((Math.random() * 2) + 1)]);
-      console.log(randomDim(options) + ": " + randomDimension[Math.floor((Math.random() * 2) + 1)]);
-      console.log("################");
+    function getTwoDimensions() {
+      var randomCategories = shuffle(categories).slice(0,2);
+      return randomCategories;
     }
+    console.log(getTwoDimensions());
+
+    randomCategories.forEach(function(category) {
+      var statementss = dimensions[category];
+      var randomStatement = shuffle(statements)[0];
+      return randomStatment;
+    });
+
+    console.log(randomStatement);
+
+    // dimensions.forEach(function(currentQuestion, questionNumber) => {
+    //   var answers = [];
+    //   for(letter in currentQuestion.answers) {
+    //     answers.push(
+    //       `<label>
+    //       <input id='radioButton' type='radio'
+    //       name='question${questionNumber}'
+    //       value='${letter}'
+    //       data-dimension='${dimension}'>
+    //       ${letter} :
+    //       ${currentQuestion.answers[letter]}
+    //       </label>`
+    //     );
+    //   }
+    // }
+
+    // Add question and answers to the output
+  //   output.push(
+  //     `<div class='slide'>
+  //     <div class='question'>Pick theoption that describes you best:</div>
+  //     <div class='answers'> ${answers.join('')} </div>
+  //     </div>`
+  //     );
+  //   });
+  //   assessmentContainer.innerHTML = output.join('');
+  // }
+
+
     // For each question
     // Pick to key values to generate each question - pop 2 values off the options hash
 
     // iterations based on a number
-
-    questions.forEach(
-      (currentQuestion, questionNumber) => {
-        // Store the list of answer choices
-        const answers = [];
-        // For each available answer
-        for(letter in currentQuestion.answers) {
-          // Add an HTML radio button
-          answers.push(
-            `<label>
-            <input id='radioButton type='radio'
-            name='question${questionNumber}'
-            value='${letter}'
-            data-dimension='${dimension}'>
-            ${letter} :
-            ${currentQuestion.answers[letter]}
-            </label>`
-          );
-        }
-
-        ${currentQuestion.dimension[dimension]}
-        // pass the dimenion to the value of a radio button - in the name or in a data attribute i.e. data-dimension
-        // $(["data-dimension='adaptive']:selected").length
-
-        // Add question and answers to the output
-        output.push(
-          `<div class='slide'>
-          <div class='question'>Pick the option that describes you best:</div>
-          <div class='answers'> ${answers.join('')} </div>
-          </div>`
-        );
-      });
-      assessmentContainer.innerHTML = output.join('');
-    }
-
-
-  function showResults() {
-    const answerContainers = assessmentContainer.querySelectorAll('.answers');
-
-    questions.forEach( (currentQuestion, questionNumber) => {
-      // keep track of number of times each dimension is chosen
-      let numAdaptive = 0;
-      let numIntegrity = 0;
-      let numCollaborative = 0;
-      let numResult = 0;
-      let numCustomer = 0;
-      let numDetail = 0;
-
-      questions.forEach((currentQuestion, questionNumber) => {
-        const answerContainer = answerContainers[questionNumber];
-        const selector = 'input[name=question'+questionNumber+']:checked';
-        const userAnswer = (answerContainer.querySelector(selector) || {}).value;
-      });
-
-      // need to increment dimension score by one if chosen
-      // match the answer with the dimension
-      if(userAnswer===currentQuestion.dimensionA){
-
-      }
-    });
-
-    // Show number of times dimension chosen by the user
-    resultsContainer.innerHTML = 'Adaptive: ' + numAdaptive + 'Integrity: ' + 'numIntegrity'
-    + 'Collaborative: ' + numCollaborative + 'Result: ' + numResult + 'Customer: ' + numCustomer
-    + 'Detail: ' + numDetail
-  }
-
-  // $(["data-dimension='adaptive']:selected").length
-
-  // pagination
-  const previousButton = document.getElementById('previous');
-  const nextButton = document.getElementById('next');
-  const slides = document.querySelectorAll('.slide');
-  let currentSlide = 0;
-
-  function showSlide(n) {
-    slides[currentSlide].classList.remove('active-slide');
-    slides[n].classList.add('active-slide');
-    currentSlide = n;
-    if(currentSlide === 0) {
-      previousButton.style.display = 'none';
-    }
-    else {
-      previousButton.style.display = 'inline-block';
-    }
-    if(currentSlide ==== slides.length-1) {
-      nextButton.style.display = 'none';
-      submitButton.style.display = 'inline-block';
-    }
-    else {
-      nextButton.style.display = 'inline-block';
-      submitButton.style.display = 'none';
-    }
-  }
-  showSlide(0);
-
-  function showNextSlide() {
-    showSlide(currentSlide + 1);
-  }
-
-  function showPreviousSlide() {
-    showSlide(currentSlide - 1);
-  }
-
-  previousButton.addEventListener('click', showPreviousSlide);
-  nextButton.addEventListener('click', showNextSlide);
-
-  const assessmentContainer = document.getElementById('assessment');
-  const resultsContainer = document.getElementById('results');
-  const submitButton = document.getElementById('submit');
-
-  // Display quiz
-  buildAssessment();
-
-  // On submit, show results
-  submitButton.addEventListener('click', showResults);
-
+//
+//     questions.forEach(
+//       (currentQuestion, questionNumber) => {
+//         // Store the list of answer choices
+//         const answers = [];
+//         // For each available answer
+//         for(letter in currentQuestion.answers) {
+//           // Add an HTML radio button
+//           answers.push(
+//             `<label>
+//             <input id='radioButton type='radio'
+//             name='question${questionNumber}'
+//             value='${letter}'
+//             data-dimension='${dimension}'>
+//             ${letter} :
+//             ${currentQuestion.answers[letter]}
+//             </label>`
+//           );
+//         }
+//
+//         ${currentQuestion.dimension[dimension]}
+//         // pass the dimenion to the value of a radio button - in the name or in a data attribute i.e. data-dimension
+//         // $(["data-dimension='adaptive']:selected").length
+//
+//         // Add question and answers to the output
+//         output.push(
+//           `<div class='slide'>
+//           <div class='question'>Pick the option that describes you best:</div>
+//           <div class='answers'> ${answers.join('')} </div>
+//           </div>`
+//         );
+//       });
+//       assessmentContainer.innerHTML = output.join('');
+//     }
+//
+//
+//   function showResults() {
+//     const answerContainers = assessmentContainer.querySelectorAll('.answers');
+//
+//     questions.forEach( (currentQuestion, questionNumber) => {
+//       // keep track of number of times each dimension is chosen
+//       let numAdaptive = 0;
+//       let numIntegrity = 0;
+//       let numCollaborative = 0;
+//       let numResult = 0;
+//       let numCustomer = 0;
+//       let numDetail = 0;
+//
+//       questions.forEach((currentQuestion, questionNumber) => {
+//         const answerContainer = answerContainers[questionNumber];
+//         const selector = 'input[name=question'+questionNumber+']:checked';
+//         const userAnswer = (answerContainer.querySelector(selector) || {}).value;
+//       });
+//
+//       // need to increment dimension score by one if chosen
+//       // match the answer with the dimension
+//       if(userAnswer===currentQuestion.dimensionA){
+//
+//       }
+//     });
+//
+//     // Show number of times dimension chosen by the user
+//     resultsContainer.innerHTML = 'Adaptive: ' + numAdaptive + 'Integrity: ' + 'numIntegrity'
+//     + 'Collaborative: ' + numCollaborative + 'Result: ' + numResult + 'Customer: ' + numCustomer
+//     + 'Detail: ' + numDetail
+//   }
+//
+//   // $(["data-dimension='adaptive']:selected").length
+//
+//   // pagination
+//   const previousButton = document.getElementById('previous');
+//   const nextButton = document.getElementById('next');
+//   const slides = document.querySelectorAll('.slide');
+//   let currentSlide = 0;
+//
+//   function showSlide(n) {
+//     slides[currentSlide].classList.remove('active-slide');
+//     slides[n].classList.add('active-slide');
+//     currentSlide = n;
+//     if(currentSlide === 0) {
+//       previousButton.style.display = 'none';
+//     }
+//     else {
+//       previousButton.style.display = 'inline-block';
+//     }
+//     if(currentSlide ==== slides.length-1) {
+//       nextButton.style.display = 'none';
+//       submitButton.style.display = 'inline-block';
+//     }
+//     else {
+//       nextButton.style.display = 'inline-block';
+//       submitButton.style.display = 'none';
+//     }
+//   }
+//   showSlide(0);
+//
+//   function showNextSlide() {
+//     showSlide(currentSlide + 1);
+//   }
+//
+//   function showPreviousSlide() {
+//     showSlide(currentSlide - 1);
+//   }
+//
+//   previousButton.addEventListener('click', showPreviousSlide);
+//   nextButton.addEventListener('click', showNextSlide);
+//
+//   const assessmentContainer = document.getElementById('assessment');
+//   const resultsContainer = document.getElementById('results');
+//   const submitButton = document.getElementById('submit');
+//
+//   // Display quiz
+//   buildAssessment();
+//
+//   // On submit, show results
+//   submitButton.addEventListener('click', showResults);
+//
 })();
